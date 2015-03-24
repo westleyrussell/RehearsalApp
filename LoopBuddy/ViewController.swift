@@ -27,7 +27,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         audioPlayer = AVAudioPlayer(contentsOfURL: song, error: nil)
         audioPlayer.prepareToPlay()
-        audioPlayer.numberOfLoops = -1
+        audioPlayer.numberOfLoops = 0
         self.playButton.titleLabel?.adjustsFontSizeToFitWidth = true
         
         audioPlayer.enableRate = true
@@ -102,7 +102,11 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
     func audioPlayerDidFinishPlaying(player: AVAudioPlayer!, successfully
         flag: Bool) {
             setSongConstraints(rangeSlider.lowerValue, songEnd: rangeSlider.upperValue)
+            audioPlayer.prepareToPlay()
+            audioPlayer.play()
     }
+    
+    
 
 }
 

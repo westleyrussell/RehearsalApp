@@ -10,7 +10,7 @@
 		6FB295531AC0BD7B0013C26F /* RangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB295501AC0BD7B0013C26F /* RangeSlider.swift */; };
 		6FB295541AC0BD7B0013C26F /* RangeSliderThumbLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB295511AC0BD7B0013C26F /* RangeSliderThumbLayer.swift */; };
 		6FB295551AC0BD7B0013C26F /* RangeSliderTrackLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB295521AC0BD7B0013C26F /* RangeSliderTrackLayer.swift */; };
-		6FB295571AC0BDE50013C26F /* Sweet Dreams.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6FB295561AC0BDE50013C26F /* Sweet Dreams.mp3 */; };
+		6FB295591AC0D4040013C26F /* Sweet Dreams.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6FB295581AC0D4040013C26F /* Sweet Dreams.mp3 */; };
 		6FB6B1E91AC0BCA400864219 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB6B1E81AC0BCA400864219 /* AppDelegate.swift */; };
 		6FB6B1EB1AC0BCA400864219 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB6B1EA1AC0BCA400864219 /* ViewController.swift */; };
 		6FB6B1EE1AC0BCA400864219 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FB6B1EC1AC0BCA400864219 /* Main.storyboard */; };
@@ -33,7 +33,7 @@
 		6FB295501AC0BD7B0013C26F /* RangeSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeSlider.swift; sourceTree = "<group>"; };
 		6FB295511AC0BD7B0013C26F /* RangeSliderThumbLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeSliderThumbLayer.swift; sourceTree = "<group>"; };
 		6FB295521AC0BD7B0013C26F /* RangeSliderTrackLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeSliderTrackLayer.swift; sourceTree = "<group>"; };
-		6FB295561AC0BDE50013C26F /* Sweet Dreams.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Sweet Dreams.mp3"; path = "../../../../../../Downloads/Sweet Dreams.mp3"; sourceTree = "<group>"; };
+		6FB295581AC0D4040013C26F /* Sweet Dreams.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Sweet Dreams.mp3"; sourceTree = "<group>"; };
 		6FB6B1E31AC0BCA400864219 /* LoopBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoopBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FB6B1E71AC0BCA400864219 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6FB6B1E81AC0BCA400864219 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -85,7 +85,7 @@
 		6FB6B1E51AC0BCA400864219 /* LoopBuddy */ = {
 			isa = PBXGroup;
 			children = (
-				6FB295561AC0BDE50013C26F /* Sweet Dreams.mp3 */,
+				6FB295581AC0D4040013C26F /* Sweet Dreams.mp3 */,
 				6FB295501AC0BD7B0013C26F /* RangeSlider.swift */,
 				6FB295511AC0BD7B0013C26F /* RangeSliderThumbLayer.swift */,
 				6FB295521AC0BD7B0013C26F /* RangeSliderTrackLayer.swift */,
@@ -206,7 +206,7 @@
 			files = (
 				6FB6B1EE1AC0BCA400864219 /* Main.storyboard in Resources */,
 				6FB6B1F31AC0BCA400864219 /* LaunchScreen.xib in Resources */,
-				6FB295571AC0BDE50013C26F /* Sweet Dreams.mp3 in Resources */,
+				6FB295591AC0D4040013C26F /* Sweet Dreams.mp3 in Resources */,
 				6FB6B1F01AC0BCA400864219 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
