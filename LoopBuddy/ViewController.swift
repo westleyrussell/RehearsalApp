@@ -17,6 +17,8 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var sliderRate: UISlider!
     @IBOutlet weak var sliderValue: UILabel!
+    @IBOutlet weak var menuButton: UIBarButtonItem!
+    
     
     
     var song = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Sweet Dreams", ofType: "mp3")!)
@@ -25,10 +27,18 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        if self.revealViewController() != nil {//set the menu button action listenter
+            menuButton.target = self.revealViewController()
+            menuButton.action = "revealToggle:"
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())//allows gesture use for viewing menu
+        }
+        
         audioPlayer = AVAudioPlayer(contentsOfURL: song, error: nil)
         audioPlayer.prepareToPlay()
         audioPlayer.numberOfLoops = 0
         self.playButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        
         
         audioPlayer.enableRate = true
         audioPlayer.delegate = self
@@ -39,6 +49,8 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
         
         
         setSongConstraints(rangeSlider.lowerValue, songEnd: rangeSlider.upperValue)
+        
+        
 
     }
     
