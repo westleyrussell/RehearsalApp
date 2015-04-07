@@ -109,7 +109,6 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
     
     func setSongConstraints(songStart: Double, songEnd: Double){
         audioPlayer.currentTime = audioPlayer.duration * songStart
-        END_TIME = songEnd
         timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "checkTime", userInfo: songStart, repeats:true)
     }
     
