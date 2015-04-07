@@ -23,8 +23,6 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
     
     var song = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Sweet Dreams", ofType: "mp3")!)
     var audioPlayer = AVAudioPlayer()
-    
-    var END_TIME = 0.0
     var timer:NSTimer!
 
     override func viewDidLoad() {
@@ -123,7 +121,18 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
     }
     
     func checkTime() {
-        if audioPlayer.currentTime >= audioPlayer.duration * END_TIME {
+        if audioPlayer.currentTime >= audioPlayer.duration * rangeSlider.upperValue
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        {
             timer.invalidate()
             setSongConstraints(rangeSlider.lowerValue, songEnd: rangeSlider.upperValue)
         }
