@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6F955CFA1AC89FDC00D66C15 /* MusicTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F955CF91AC89FDC00D66C15 /* MusicTableViewController.swift */; };
 		6F955CFC1AC89FFC00D66C15 /* StemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F955CFB1AC89FFC00D66C15 /* StemTableViewController.swift */; };
+		6F955D001ACF4B3E00D66C15 /* MusicItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F955CFF1ACF4B3E00D66C15 /* MusicItem.swift */; };
 		6FB295531AC0BD7B0013C26F /* RangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB295501AC0BD7B0013C26F /* RangeSlider.swift */; };
 		6FB295541AC0BD7B0013C26F /* RangeSliderThumbLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB295511AC0BD7B0013C26F /* RangeSliderThumbLayer.swift */; };
 		6FB295551AC0BD7B0013C26F /* RangeSliderTrackLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB295521AC0BD7B0013C26F /* RangeSliderTrackLayer.swift */; };
@@ -36,6 +37,7 @@
 /* Begin PBXFileReference section */
 		6F955CF91AC89FDC00D66C15 /* MusicTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicTableViewController.swift; sourceTree = "<group>"; };
 		6F955CFB1AC89FFC00D66C15 /* StemTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StemTableViewController.swift; sourceTree = "<group>"; };
+		6F955CFF1ACF4B3E00D66C15 /* MusicItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicItem.swift; sourceTree = "<group>"; };
 		6FB295501AC0BD7B0013C26F /* RangeSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeSlider.swift; sourceTree = "<group>"; };
 		6FB295511AC0BD7B0013C26F /* RangeSliderThumbLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeSliderThumbLayer.swift; sourceTree = "<group>"; };
 		6FB295521AC0BD7B0013C26F /* RangeSliderTrackLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeSliderTrackLayer.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 				6FB6B1F11AC0BCA400864219 /* LaunchScreen.xib */,
 				6FB6B1E61AC0BCA400864219 /* Supporting Files */,
 				6F955CFB1AC89FFC00D66C15 /* StemTableViewController.swift */,
+				6F955CFF1ACF4B3E00D66C15 /* MusicItem.swift */,
 			);
 			path = LoopBuddy;
 			sourceTree = "<group>";
@@ -249,6 +252,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F955D001ACF4B3E00D66C15 /* MusicItem.swift in Sources */,
 				6F955CFC1AC89FFC00D66C15 /* StemTableViewController.swift in Sources */,
 				6FB6B1EB1AC0BCA400864219 /* ViewController.swift in Sources */,
 				6FB295551AC0BD7B0013C26F /* RangeSliderTrackLayer.swift in Sources */,

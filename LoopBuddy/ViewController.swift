@@ -35,7 +35,8 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
         if self.revealViewController() != nil {//set the menu button action listenter
             menuButton.target = self.revealViewController()
             menuButton.action = "revealToggle:"
-            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())//allows gesture use for viewing menu
+            //self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())//allows gesture use for viewing menu
+            //TODO:Fix bug where using slider also brings out menu
         }
         
         audioPlayer = AVAudioPlayer(contentsOfURL: song, error: nil)

@@ -5,12 +5,27 @@
 //  Created by Westley Russell on 3/29/15.
 //  Copyright (c) 2015 Westley Russell. All rights reserved.
 //
-
+import MediaPlayer
 import UIKit
 
 class MusicTableViewController: UITableViewController {
+    
+    struct TableView{
+        struct CellIdentifiers{
+            static let MusicCell = "MusicCell"
+        }
+    }
 
     @IBOutlet weak var menuButton: UIBarButtonItem!
+    
+    
+    //var mediaQuery = MPMediaQuery()
+    
+    var songsArray = [MPMediaItem]()
+    var musicItemArray = [MusicItem]()
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -18,6 +33,13 @@ class MusicTableViewController: UITableViewController {
             menuButton.target = self.revealViewController()
             menuButton.action = "revealToggle:"
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
+        
+        songsArray = MPMediaQuery.songsQuery().items as [MPMediaItem]
+        for songItem in songsArray{
+            var song:MusicItem? = MusicItem(songName: songItem.title, songArtist: songItem.albumArtist, songAlbum: songItem.albumTitle,  songGenre: songItem.genre)
+            musicItemArray.append(song!)
+            
         }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -36,24 +58,28 @@ class MusicTableViewController: UITableViewController {
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return 0
+        return musicItemArray.count
     }
 
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(TableView.CellIdentifiers.MusicCell, forIndexPath: indexPath) as MusicCell
 
         // Configure the cell...
+        cell.configureForMusic(musicItemArray[indexPath.row])
+        
 
         return cell
     }
-    */
+    
+    
+    
 
     /*
     // Override to support conditional editing of the table view.
@@ -100,4 +126,17 @@ class MusicTableViewController: UITableViewController {
     }
     */
 
+}
+
+class MusicCell: UITableViewCell{
+   
+    @IBOutlet weak var songTitleLabel: UILabel!
+    @IBOutlet weak var songArtistLabel: UILabel!
+    @IBOutlet weak var songAlbumLabel: UILabel!
+    
+    func configureForMusic(song: MusicItem){
+        songTitleLabel.text = song.songName
+        songArtistLabel.text = song.songArtist
+        songAlbumLabel.text = song.songAlbum
+    }
 }
