@@ -12,11 +12,12 @@ import AVFoundation
 class ViewController: UIViewController, AVAudioPlayerDelegate {
     var counter = 0
     let rangeSlider  = RangeSlider(frame: CGRectZero)
+    let red = UIColor(red:245, green:99,blue:86,alpha:1.0)
     
-   
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var sliderRate: UISlider!
     @IBOutlet weak var sliderValue: UILabel!
+    @IBOutlet weak var songTitle: UILabel!
     @IBOutlet weak var menuButton: UIBarButtonItem!
     
     
@@ -28,6 +29,8 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        self.view.backgroundColor = UIColor(red:247/255, green:247/255,blue:247/255,alpha:1.0)
         
         if self.revealViewController() != nil {//set the menu button action listenter
             menuButton.target = self.revealViewController()
@@ -58,7 +61,16 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
     override func viewDidLayoutSubviews() {
         let margin:CGFloat = 20.0
         let width = view.bounds.width - 2.0 * margin
-        rangeSlider.frame = CGRect(x: margin, y: margin + topLayoutGuide.length, width: width, height: 31.0)
+        rangeSlider.frame = CGRect(x: margin, y: margin + topLayoutGuide.length + 15, width: width, height: 31.0)
+    }
+    
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        var nav = self.navigationController?.navigationBar
+        nav?.barStyle = UIBarStyle.Black
+        nav?.tintColor = UIColor.whiteColor()
+        nav?.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
     }
 
 
@@ -75,14 +87,20 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
     }
 
     @IBAction func playButton(sender: AnyObject) {
-        if self.playButton.titleLabel?.text == "Play"{
-            self.playButton.setTitle("Pause", forState: .Normal)
-            //self.playButton.titleLabel?.font = UIFont(name: "Helvetica Neue", size: 15.0)
-            
+        if self.playButton.currentImage == UIImage(named:"Play.png"){
+            self.playButton.setImage(UIImage(named:"Pause.png"), forState: .Normal)
             audioPlayer.play()
         }
+        //if self.playButton.titleLabel?.text == "Play"{
+            //self.playButton.setTitle("Pause", forState: .Normal)
+            //self.playButton.setImage(UIImage(named:"Pause.png"), forState: .Normal)
+            //self.playButton.titleLabel?.font = UIFont(name: "Helvetica Neue", size: 15.0)
+            
+        //}
         else{
-            self.playButton.setTitle("Play", forState: .Normal)
+            
+            self.playButton.setImage(UIImage(named:"Play.png"), forState: .Normal)
+            
             audioPlayer.pause()
         }
 

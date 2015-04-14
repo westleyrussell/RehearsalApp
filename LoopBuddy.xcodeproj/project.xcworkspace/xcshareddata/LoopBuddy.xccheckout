@@ -10,29 +10,29 @@
 	<string>LoopBuddy</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>7E4EB316BB97379EF0F886B35D8004E786DFF109</key>
+		<key>ADCC7F808F1F82EBBD84D82D555F9F76CB6E5671</key>
 		<string>https://github.com/westleyrussell/RehearsalApp.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>LoopBuddy/LoopBuddy.xcodeproj</string>
+	<string>LoopBuddy.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>7E4EB316BB97379EF0F886B35D8004E786DFF109</key>
-		<string>../../..</string>
+		<key>ADCC7F808F1F82EBBD84D82D555F9F76CB6E5671</key>
+		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/westleyrussell/RehearsalApp.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>7E4EB316BB97379EF0F886B35D8004E786DFF109</string>
+	<string>ADCC7F808F1F82EBBD84D82D555F9F76CB6E5671</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>7E4EB316BB97379EF0F886B35D8004E786DFF109</string>
+			<string>ADCC7F808F1F82EBBD84D82D555F9F76CB6E5671</string>
 			<key>IDESourceControlWCCName</key>
 			<string>RehearsalApp</string>
 		</dict>

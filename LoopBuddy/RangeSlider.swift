@@ -10,6 +10,7 @@ import UIKit
 import QuartzCore
 
 class RangeSlider: UIControl {
+    
     var minimumValue: Double = 0.0{
         didSet{
             updateLayerFrames()
@@ -43,7 +44,7 @@ class RangeSlider: UIControl {
             trackLayer.setNeedsDisplay()
         }
     }
-    var trackHighlightTintColor:UIColor = UIColor(red: 0.0, green: 0.45, blue: 0.94, alpha: 1.0){
+    var trackHighlightTintColor:UIColor = UIColor(red:245/255, green:99/255, blue:86/255, alpha:1.0){
         didSet{
             trackLayer.setNeedsDisplay()
         }
