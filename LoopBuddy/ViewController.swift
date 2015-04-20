@@ -108,8 +108,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
     }
     
     @IBAction func sliderRate(sender: AnyObject) {
-        audioPlayer.rate = self.sliderRate.value
-        updateSliderValue(audioPlayer.rate)
+        adjTempo(0)
     }
     
     @IBAction func resetButton(sender: AnyObject) {
@@ -122,7 +121,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
     }
     
     func updateSliderValue(value: Float){
-    self.sliderValue.text = value.description
+        self.sliderValue.text = value.description
     
     }
     
@@ -140,22 +139,30 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
     
     func checkTime() {
         if audioPlayer.currentTime >= audioPlayer.duration * rangeSlider.upperValue
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         {
             timer.invalidate()
             setSongConstraints(rangeSlider.lowerValue, songEnd: rangeSlider.upperValue)
         }
     }
     
+    func adjTempo(value: Float) {
+        var sliderVal = value + round(10 * self.sliderRate.value) / 10
+        //prevents outofbounds
+        if sliderVal > 2 { sliderVal = 2 }
+        if sliderVal < 0.3 { sliderVal = 0.3 }
+        //adjusts the slider to correct position
+        self.sliderRate.value = sliderVal
+        audioPlayer.rate = sliderVal
+        updateSliderValue(audioPlayer.rate)
+    }
+    
+    func incrementSlider() {
+        adjTempo(0.1)
+    }
+    
+    func decrementSlider() {
+        adjTempo(-0.1)
+    }
     
 
 }
