@@ -126,7 +126,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
     }
     
     func setSongConstraints(songStart: Double, songEnd: Double){
-        audioPlayer.currentTime = audioPlayer.duration * songStart
+        audioPlayer.currentTime = getStartPoint()
         timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "checkTime", userInfo: songStart, repeats:true)
     }
     
@@ -164,6 +164,29 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
         adjTempo(-0.1)
     }
     
+    //The functions below are in case we wish to manually edit the start and endpoints through the UI. Can be moved elsewhwere/removed if needed.
+    
+    func setStartPoint(value: Double) {
+        var start = value
+        if value < 0 { start = 0 }
+        if value > 1.0 { start = 1.0 }
+        setSongConstraints(start, songEnd: rangeSlider.upperValue)
+    }
+    
+    func setEndPoint(value: Double) {
+        var end = value
+        if value < 0 { end = 0 }
+        if value > 1.0 { end = 1.0 }
+        setSongConstraints(rangeSlider.lowerValue, songEnd: end)
+    }
+    
+    func getStartPoint() -> Double {
+        return rangeSlider.lowerValue * audioPlayer.duration
+    }
+    
+    func getEndPoint() -> Double {
+        return rangeSlider.upperValue * audioPlayer.duration
+    }
 
 }
 
