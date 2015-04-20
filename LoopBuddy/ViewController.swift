@@ -19,8 +19,8 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
     @IBOutlet weak var sliderValue: UILabel!
     @IBOutlet weak var songTitle: UILabel!
     @IBOutlet weak var menuButton: UIBarButtonItem!
-    
-    
+    @IBOutlet weak var startTime: UITextField!
+    @IBOutlet weak var endTime: UITextField!
     
     var song = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Sweet Dreams", ofType: "mp3")!)
     var audioPlayer = AVAudioPlayer()
@@ -52,10 +52,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
         
         rangeSlider.addTarget(self, action: "rangeSliderValueChanged:", forControlEvents: .ValueChanged)
         
-        
         setSongConstraints(rangeSlider.lowerValue, songEnd: rangeSlider.upperValue)
-        
-        
 
     }
     
@@ -128,6 +125,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
     func setSongConstraints(songStart: Double, songEnd: Double){
         audioPlayer.currentTime = getStartPoint()
         timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "checkTime", userInfo: songStart, repeats:true)
+        updateTimeTexts(getStartPoint(), end: getEndPoint())
     }
     
     func audioPlayerDidFinishPlaying(player: AVAudioPlayer!, successfully
@@ -186,6 +184,25 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
     
     func getEndPoint() -> Double {
         return rangeSlider.upperValue * audioPlayer.duration
+    }
+    
+    func updateTimeTexts(start: Double, end:  Double) {
+        self.startTime.text = secondsToTime(start)
+        self.endTime.text = secondsToTime(end)
+    }
+    
+    func secondsToTime(seconds: Double) -> String {
+        let hour = Int(seconds / 3600)
+        let min = Int((seconds % 3600) / 60)
+        let sec = Int(seconds % 60)
+        let mill = (seconds % 60) - Double(sec)
+        
+        let h = String(hour)
+        let m = String(min)
+        let s = String(sec)
+        let mi = String(format:"%f", mill)
+        
+        return h + ":" + m + ":" + s + ":" + m
     }
 
 }

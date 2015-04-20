@@ -335,6 +335,28 @@
                                     <action selector="resetButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="8G1-hS-tsd"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Start Time:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OYQ-iT-hNh">
+                                <rect key="frame" x="82" y="429" width="94" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="End Time:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hrK-Yy-Low">
+                                <rect key="frame" x="82" y="467" width="94" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2bx-KH-PSJ">
+                                <rect key="frame" x="184" y="463" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Start Time Here" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K8b-iR-9r1">
+                                <rect key="frame" x="184" y="425" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <variation key="default">
@@ -354,15 +376,18 @@
                         <barButtonItem key="leftBarButtonItem" image="menu" id="aSy-W2-VQ8"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="endTime" destination="2bx-KH-PSJ" id="yco-KS-zeN"/>
                         <outlet property="menuButton" destination="aSy-W2-VQ8" id="wUO-Bh-RTq"/>
                         <outlet property="playButton" destination="3XH-g3-Z2C" id="xcg-aY-F5f"/>
                         <outlet property="sliderRate" destination="d6e-pi-4nC" id="AYA-qS-o0a"/>
                         <outlet property="sliderValue" destination="7sA-Pu-CXa" id="XSd-Op-nh8"/>
+                        <outlet property="songTitle" destination="twP-sK-lNd" id="bSO-c0-Kpe"/>
+                        <outlet property="startTime" destination="K8b-iR-9r1" id="fWe-o3-k06"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1948.5" y="-704"/>
+            <point key="canvasLocation" x="1948" y="-704"/>
         </scene>
     </scenes>
     <resources>
