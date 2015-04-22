@@ -86,6 +86,10 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
         setSongConstraints(rangeSlider.lowerValue, songEnd: rangeSlider.upperValue)
         
     }
+    
+    func songSelected(song: MusicItem){
+        
+    }
 
     @IBAction func playButton(sender: AnyObject) {
         if self.playButton.currentImage == UIImage(named:"Play.png"){
@@ -140,15 +144,6 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
     
     func checkTime() {
         if audioPlayer.currentTime >= audioPlayer.duration * rangeSlider.upperValue
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
         {
             timer.invalidate()

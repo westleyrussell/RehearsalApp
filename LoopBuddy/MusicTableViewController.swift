@@ -10,6 +10,8 @@ import UIKit
 
 class MusicTableViewController: UITableViewController {
     
+    
+    
     struct TableView{
         struct CellIdentifiers{
             static let MusicCell = "MusicCell"
@@ -41,6 +43,8 @@ class MusicTableViewController: UITableViewController {
             musicItemArray.append(song!)
             
         }
+        
+        self.tableView.reloadData()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -78,6 +82,13 @@ class MusicTableViewController: UITableViewController {
         return cell
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath!)
+    {
+        let row = indexPath?.row
+        println(row)
+        let vc : AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("mainScreen")
+        self.showViewController(vc as UIViewController, sender: vc)
+    }
     
     
 
