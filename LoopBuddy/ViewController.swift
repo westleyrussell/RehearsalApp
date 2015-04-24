@@ -19,6 +19,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
     @IBOutlet weak var sliderValue: UILabel!
     @IBOutlet weak var songTitle: UILabel!
     @IBOutlet weak var menuButton: UIBarButtonItem!
+    var songName:String = ""
     
     
     
@@ -31,6 +32,10 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         
         self.view.backgroundColor = UIColor(red:247/255, green:247/255,blue:247/255,alpha:1.0)
+        
+        
+        
+        
         
         if self.revealViewController() != nil {//set the menu button action listenter
             menuButton.target = self.revealViewController()
@@ -58,6 +63,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
         
 
     }
+    
     
     override func viewDidLayoutSubviews() {
         let margin:CGFloat = 20.0

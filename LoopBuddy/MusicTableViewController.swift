@@ -8,7 +8,8 @@
 import MediaPlayer
 import UIKit
 
-class MusicTableViewController: UITableViewController {
+
+class MusicTableViewController: UITableViewController, UISearchBarDelegate, UISearchDisplayDelegate {
     
     
     
@@ -21,10 +22,14 @@ class MusicTableViewController: UITableViewController {
     @IBOutlet weak var menuButton: UIBarButtonItem!
     
     
-    //var mediaQuery = MPMediaQuery()
     
-    var songsArray = [MPMediaItem]()
-    var musicItemArray = [MusicItem]()
+    
+    var songsArray = [MPMediaItem]()//the songs from the library
+    
+    var musicItemArray = [MusicItem]()//changes the songs from the query to our musicItem class
+    
+    var filteredSongs = [MusicItem]()//the filtered search results
+    
     
     
     
@@ -37,12 +42,25 @@ class MusicTableViewController: UITableViewController {
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
         
+        //For Production
+        /*
         songsArray = MPMediaQuery.songsQuery().items as [MPMediaItem]
         for songItem in songsArray{
-            var song:MusicItem? = MusicItem(songName: songItem.title, songArtist: songItem.albumArtist, songAlbum: songItem.albumTitle,  songGenre: songItem.genre)
+            var song:MusicItem? = MusicItem(songName: songItem.title, songArtist: songItem.albumArtist, songAlbum: songItem.albumTitle,  songGenre: songItem.genre, category: MusicItem.Category.Songs)
             musicItemArray.append(song!)
             
         }
+        */
+        
+        //for testing
+        self.musicItemArray = [MusicItem(songName: "Pay No Mind (Ft. Passion Pit)", songArtist: "Madeon", songAlbum: "Thigh Gap Nation",  songGenre: "Pre Game", category: MusicItem.Category.Songs),
+            MusicItem(songName: "Never Stop", songArtist: "Charlie XCX X Calvin Harris X Alex Farway", songAlbum: "Thigh Gap Nation",  songGenre: "Pre Game", category: MusicItem.Category.Songs),
+            MusicItem(songName: "Real Love", songArtist: "Clean Bandit & Jess Glynne", songAlbum: "Thigh Gap Nation",  songGenre: "Pre Game", category: MusicItem.Category.Songs),
+            MusicItem(songName: "Love Me like You Do(ATB Remix)", songArtist: "Ellie Goulding", songAlbum: "Thigh Gap Nation",  songGenre: "Pre Game", category: MusicItem.Category.Songs),
+            MusicItem(songName: "Blue Khakis", songArtist: "Avicii x Elephante x O.T. Genasis x Savant", songAlbum: "Thigh Gap Nation",  songGenre: "Pre Game", category: MusicItem.Category.Songs),
+            MusicItem(songName: "Truffle Butter", songArtist: "Nicki Minaj", songAlbum: "Thigh Gap Nation",  songGenre: "Pre Game", category: MusicItem.Category.Songs),
+            MusicItem(songName: "Wasted (Ummet Ozcan Remix)", songArtist: "Tiesto", songAlbum: "Thigh Gap Nation",  songGenre: "Pre Game", category: MusicItem.Category.Songs)]
+            
         
         self.tableView.reloadData()
         // Uncomment the following line to preserve selection between presentations
@@ -68,29 +86,84 @@ class MusicTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return musicItemArray.count
+        if tableView == self.searchDisplayController!.searchResultsTableView{
+            return self.filteredSongs.count
+        }
+        else{
+            return self.musicItemArray.count
+        }
+        
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(TableView.CellIdentifiers.MusicCell, forIndexPath: indexPath) as MusicCell
-
-        // Configure the cell...
-        cell.configureForMusic(musicItemArray[indexPath.row])
+        let cell = self.tableView.dequeueReusableCellWithIdentifier("Cell") as MusicCell //reusable cell from tableview
+        var song : MusicItem
+        
+        if tableView == self.searchDisplayController!.searchResultsTableView{
+            song = filteredSongs[indexPath.row]
+        }
+        else{
+            song = self.musicItemArray[indexPath.row]
+        }
+        
+        // Configure the cell
+        
+        cell.configureMusicCell(song)
         
 
         return cell
     }
+    /*
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
+        self.performSegueWithIdentifier("mainScreen", sender: tableView)
+        
+    }
+*/
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath!)
-    {
-        let row = indexPath?.row
-        println(row)
-        let vc : AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("mainScreen")
-        self.showViewController(vc as UIViewController, sender: vc)
+    func filterContentForSearchText(searchText: String){
+        //filter array
+        self.filteredSongs = self.musicItemArray.filter({(song: MusicItem) -> Bool in
+            let stringMatch = song.songName.lowercaseString.rangeOfString(searchText.lowercaseString)
+            return (stringMatch != nil)
+        })
+    }
+    //reloads the table when the search bar is updated
+    func searchDisplayController(controller: UISearchDisplayController!, shouldReloadTableForSearchString searchString: String!) -> Bool{
+        self.filterContentForSearchText(searchString)
+        return true
     }
     
+    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchScope searchOption: Int) -> Bool {
+        self.filterContentForSearchText(self.searchDisplayController!.searchBar.text)
+        return true
+    }
     
+    //Set the row height for the search table view to be the same as the table view
+    func searchDisplayController(controller: UISearchDisplayController, didLoadSearchResultsTableView tableView: UITableView) {
+        tableView.rowHeight = 109;
+    }
+    /*
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!){
+        if segue.identifier == "mainScreen"{
+            let mainScreenViewController = segue.destinationViewController as ViewController
+            
+            if sender as MusicTableViewController == self.searchDisplayController!.searchResultsTableView{
+                let indexPath = self.searchDisplayController!.searchResultsTableView.indexPathForSelectedRow()!
+                let destinationTitle = self.filteredSongs[indexPath.row].songName
+                mainScreenViewController.songTitle.text = destinationTitle
+                
+            }
+
+            else{
+                let indexPath = self.tableView.indexPathForSelectedRow()!
+                let destinationTitle = self.musicItemArray[indexPath.row].songName
+                mainScreenViewController.songTitle.text = destinationTitle
+            }
+        }
+    }
+    
+    */
 
     /*
     // Override to support conditional editing of the table view.
@@ -139,15 +212,3 @@ class MusicTableViewController: UITableViewController {
 
 }
 
-class MusicCell: UITableViewCell{
-   
-    @IBOutlet weak var songTitleLabel: UILabel!
-    @IBOutlet weak var songArtistLabel: UILabel!
-    @IBOutlet weak var songAlbumLabel: UILabel!
-    
-    func configureForMusic(song: MusicItem){
-        songTitleLabel.text = song.songName
-        songArtistLabel.text = song.songArtist
-        songAlbumLabel.text = song.songAlbum
-    }
-}
