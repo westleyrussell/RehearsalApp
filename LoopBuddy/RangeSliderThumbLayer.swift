@@ -20,7 +20,7 @@ class RangeSliderThumbLayer: CALayer {
     
     override func drawInContext(ctx: CGContext!) {
         if let slider = rangeSlider {
-            let thumbFrame = bounds.rectByInsetting(dx: 2.0, dy: 2.0)
+            let thumbFrame = bounds.rectByInsetting(dx: 0.0, dy: 0.0)
             let cornerRadius = thumbFrame.height * slider.curvaceousness / 2.0
             let thumbPath = UIBezierPath(roundedRect: thumbFrame, cornerRadius: cornerRadius)
             
@@ -33,7 +33,7 @@ class RangeSliderThumbLayer: CALayer {
             
             // Outline
             CGContextSetStrokeColorWithColor(ctx, shadowColor.CGColor)
-            CGContextSetLineWidth(ctx, 0.5)
+            CGContextSetLineWidth(ctx, 0.0)
             CGContextAddPath(ctx, thumbPath.CGPath)
             CGContextStrokePath(ctx)
             

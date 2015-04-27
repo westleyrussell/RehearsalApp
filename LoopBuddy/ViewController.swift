@@ -8,19 +8,23 @@
 
 import UIKit
 import AVFoundation
+import QuartzCore
 
 class ViewController: UIViewController, AVAudioPlayerDelegate {
     var counter = 0
     let rangeSlider  = RangeSlider(frame: CGRectZero)
-    let red = UIColor(red:245, green:99,blue:86,alpha:1.0)
+    let red = UIColor(red:245/255, green:99/255,blue:86/255,alpha:1.0)
     
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var sliderRate: UISlider!
     @IBOutlet weak var sliderValue: UILabel!
     @IBOutlet weak var songTitle: UILabel!
     @IBOutlet weak var menuButton: UIBarButtonItem!
-    
-    
+    @IBOutlet weak var saveSampleButton: UIButton!
+    @IBOutlet weak var saveSample: UIButton!
+    @IBOutlet weak var tempoStepper: UIStepper!
+    @IBOutlet weak var sliderEndPoint: UITextField!
+    @IBOutlet weak var sliderStartPoint: UITextField!
     
     var song = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Sweet Dreams", ofType: "mp3")!)
     var audioPlayer = AVAudioPlayer()
@@ -31,6 +35,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         
         self.view.backgroundColor = UIColor(red:247/255, green:247/255,blue:247/255,alpha:1.0)
+        //self.saveSample.layer.cornerRadius = 15.0
         
         if self.revealViewController() != nil {//set the menu button action listenter
             menuButton.target = self.revealViewController()
@@ -54,6 +59,18 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
         
         setSongConstraints(rangeSlider.lowerValue, songEnd: rangeSlider.upperValue)
         
+
+        self.saveSampleButton.layer.cornerRadius = 20.0
+        
+        self.tempoStepper.wraps = true
+        self.tempoStepper.autorepeat = true
+        self.tempoStepper.maximumValue = 2
+        self.tempoStepper.minimumValue = 0
+        self.tempoStepper.value = 1
+        self.tempoStepper.stepValue = 0.001
+        
+        
+        
         
 
     }
@@ -61,7 +78,8 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
     override func viewDidLayoutSubviews() {
         let margin:CGFloat = 20.0
         let width = view.bounds.width - 2.0 * margin
-        rangeSlider.frame = CGRect(x: margin, y: margin + topLayoutGuide.length + 15, width: width, height: 31.0)
+        rangeSlider.frame = CGRect(x: margin, y: margin + topLayoutGuide.length + 80, width: width, height: 31.0)
+        
     }
     
 
@@ -71,6 +89,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
         nav?.barStyle = UIBarStyle.Black
         nav?.tintColor = UIColor.whiteColor()
         nav?.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        
     }
 
 
@@ -155,7 +174,24 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
         }
     }
     
-    
+    @IBAction func saveSamplePress(sender: UIButton) {
 
+            let alertController = UIAlertController(title: "Save Sample", message:
+                "Save this sample of Song Title?", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default,handler: nil))
+            alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
+
+    }
+    
+    @IBAction func tempoValueChanged(sender: UIStepper) {
+            sliderValue.text = Int(sender.value).description
+    }
+    @IBAction func startPointSet(sender: UITextField) {
+    }
+
+    @IBAction func endPointSet(sender: UITextField) {
+    }
 }
 

@@ -44,19 +44,19 @@ class RangeSlider: UIControl {
             trackLayer.setNeedsDisplay()
         }
     }
-    var trackHighlightTintColor:UIColor = UIColor(red:245/255, green:99/255, blue:86/255, alpha:1.0){
+    var trackHighlightTintColor:UIColor = UIColor(red:32/255, green:108/255, blue:128/255, alpha:1.0){
         didSet{
             trackLayer.setNeedsDisplay()
         }
     }
-    var thumbTintColor:UIColor = UIColor.whiteColor(){
+    var thumbTintColor:UIColor = UIColor(red:245/255, green:99/255, blue:86/255, alpha:1.0){
         didSet{
             lowerThumbLayer.setNeedsDisplay()
             upperThumbLayer.setNeedsDisplay()
         }
     }
     
-    var curvaceousness: CGFloat = 1.0{
+    var curvaceousness: CGFloat = 0.0{
         didSet{
             trackLayer.setNeedsDisplay()
             lowerThumbLayer.setNeedsDisplay()
@@ -101,11 +101,11 @@ class RangeSlider: UIControl {
         trackLayer.setNeedsDisplay()
         
         let lowerThumbCenter = CGFloat(positionForValue(lowerValue))
-        lowerThumbLayer.frame = CGRect(x:lowerThumbCenter - thumbWidth / 2.0, y: 0.0, width: thumbWidth, height: thumbWidth)
+        lowerThumbLayer.frame = CGRect(x:lowerThumbCenter - thumbWidth / 10.0, y: 0.0, width: thumbWidth/10, height: thumbWidth)
         lowerThumbLayer.setNeedsDisplay()
         
         let upperThumbCenter = CGFloat(positionForValue(upperValue))
-        upperThumbLayer.frame = CGRect(x:upperThumbCenter - thumbWidth / 2.0, y: 0.0, width: thumbWidth, height: thumbWidth)
+        upperThumbLayer.frame = CGRect(x:upperThumbCenter - thumbWidth / 10.0, y: 0.0, width: thumbWidth/10, height: thumbWidth)
         upperThumbLayer.setNeedsDisplay()
         
         CATransaction.commit()
@@ -113,7 +113,7 @@ class RangeSlider: UIControl {
     }
     
     func positionForValue(value: Double) -> Double{
-        return Double(bounds.width - thumbWidth) * (value - minimumValue) / (maximumValue - minimumValue) + Double(thumbWidth / 2.0)
+        return Double(bounds.width - thumbWidth/10) * (value - minimumValue) / (maximumValue - minimumValue) + Double(thumbWidth/10)
     }
     
     override var frame: CGRect{
