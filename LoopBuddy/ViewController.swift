@@ -17,6 +17,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var sliderRate: UISlider!
     @IBOutlet weak var sliderValue: UILabel!
+    
     @IBOutlet weak var songTitle: UILabel!
     @IBOutlet weak var menuButton: UIBarButtonItem!
     var songName:String = ""
@@ -32,6 +33,18 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         
         self.view.backgroundColor = UIColor(red:247/255, green:247/255,blue:247/255,alpha:1.0)
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        songName = appDelegate.songTitle
+        println(songName)
+        println(appDelegate.songUrl)
+        self.songTitle.text = songName
+        if var path = appDelegate.songUrl{
+            println(path)
+            self.song = path
+        }
+        
+        
+        
         
         
         
@@ -56,7 +69,8 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
         view.addSubview(rangeSlider)
         
         rangeSlider.addTarget(self, action: "rangeSliderValueChanged:", forControlEvents: .ValueChanged)
-        
+        rangeSlider.lowerValue = appDelegate.songStart
+        rangeSlider.upperValue = appDelegate.songEnd
         
         setSongConstraints(rangeSlider.lowerValue, songEnd: rangeSlider.upperValue)
         
@@ -93,9 +107,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
         
     }
     
-    func songSelected(song: MusicItem){
-        
-    }
+    
 
     @IBAction func playButton(sender: AnyObject) {
         if self.playButton.currentImage == UIImage(named:"Play.png"){

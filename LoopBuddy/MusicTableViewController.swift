@@ -30,6 +30,8 @@ class MusicTableViewController: UITableViewController, UISearchBarDelegate, UISe
     
     var filteredSongs = [MusicItem]()//the filtered search results
     
+    var isSearching:Bool = false
+    
     
     
     
@@ -48,18 +50,18 @@ class MusicTableViewController: UITableViewController, UISearchBarDelegate, UISe
         for songItem in songsArray{
             var song:MusicItem? = MusicItem(songName: songItem.title, songArtist: songItem.albumArtist, songAlbum: songItem.albumTitle,  songGenre: songItem.genre, category: MusicItem.Category.Songs)
             musicItemArray.append(song!)
-            
+        
         }
         */
         
         //for testing
-        self.musicItemArray = [MusicItem(songName: "Pay No Mind (Ft. Passion Pit)", songArtist: "Madeon", songAlbum: "Thigh Gap Nation",  songGenre: "Pre Game", category: MusicItem.Category.Songs),
-            MusicItem(songName: "Never Stop", songArtist: "Charlie XCX X Calvin Harris X Alex Farway", songAlbum: "Thigh Gap Nation",  songGenre: "Pre Game", category: MusicItem.Category.Songs),
-            MusicItem(songName: "Real Love", songArtist: "Clean Bandit & Jess Glynne", songAlbum: "Thigh Gap Nation",  songGenre: "Pre Game", category: MusicItem.Category.Songs),
-            MusicItem(songName: "Love Me like You Do(ATB Remix)", songArtist: "Ellie Goulding", songAlbum: "Thigh Gap Nation",  songGenre: "Pre Game", category: MusicItem.Category.Songs),
-            MusicItem(songName: "Blue Khakis", songArtist: "Avicii x Elephante x O.T. Genasis x Savant", songAlbum: "Thigh Gap Nation",  songGenre: "Pre Game", category: MusicItem.Category.Songs),
-            MusicItem(songName: "Truffle Butter", songArtist: "Nicki Minaj", songAlbum: "Thigh Gap Nation",  songGenre: "Pre Game", category: MusicItem.Category.Songs),
-            MusicItem(songName: "Wasted (Ummet Ozcan Remix)", songArtist: "Tiesto", songAlbum: "Thigh Gap Nation",  songGenre: "Pre Game", category: MusicItem.Category.Songs)]
+        self.musicItemArray = [MusicItem(songName: "Pay No Mind (Ft. Passion Pit)", songArtist: "Madeon", songAlbum: "Thigh Gap Nation",  songGenre: "Pre Game", category: "Songs", location: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Pay No Mind", ofType: "mp3")!)!),
+            MusicItem(songName: "Never Stop", songArtist: "Charlie XCX X Calvin Harris X Alex Farway", songAlbum: "Thigh Gap Nation",  songGenre: "Pre Game", category: "Songs", location: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Never Stop", ofType: "mp3")!)!),
+            MusicItem(songName: "Real Love", songArtist: "Clean Bandit & Jess Glynne", songAlbum: "Thigh Gap Nation",  songGenre: "Pre Game", category: "Songs", location: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Real Love", ofType: "mp3")!)!),
+            MusicItem(songName: "Love Me like You Do(ATB Remix)", songArtist: "Ellie Goulding", songAlbum: "Thigh Gap Nation",  songGenre: "Pre Game", category: "Songs", location: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Love Me Like You Do", ofType: "mp3")!)!),
+            MusicItem(songName: "The Hum", songArtist: "Dimitri Vegas & Like Mike & Ummet Ozcan", songAlbum: "Thigh Gap Nation",  songGenre: "Pre Game", category: "Songs", location: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("The Hum", ofType: "mp3")!)!),
+            MusicItem(songName: "Truffle Butter", songArtist: "Nicki Minaj", songAlbum: "Thigh Gap Nation",  songGenre: "Pre Game", category: "Songs", location: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Truffle Butter", ofType: "mp3")!)!),
+            MusicItem(songName: "Wasted (Ummet Ozcan Remix)", songArtist: "Tiesto", songAlbum: "Thigh Gap Nation",  songGenre: "Pre Game", category: "Songs", location: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Wasted", ofType: "mp3")!)!)]
             
         
         self.tableView.reloadData()
@@ -114,28 +116,49 @@ class MusicTableViewController: UITableViewController, UISearchBarDelegate, UISe
 
         return cell
     }
-    /*
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
-        self.performSegueWithIdentifier("mainScreen", sender: tableView)
+        //self.performSegueWithIdentifier("mainScreen", sender: tableView)
+        if isSearching{
+            let indexPath = self.searchDisplayController!.searchResultsTableView.indexPathForSelectedRow()!
+            let song = self.filteredSongs[indexPath.row]
+            setAttributes(song)
+            
+            
+        }
+            
+        else{
+            let indexPath = self.tableView.indexPathForSelectedRow()!
+            let song = self.musicItemArray[indexPath.row]
+            setAttributes(song)
+            
+        }
         
     }
-*/
+
     
-    func filterContentForSearchText(searchText: String){
+    func filterContentForSearchText(searchText: String, scope: String = "All"){
         //filter array
         self.filteredSongs = self.musicItemArray.filter({(song: MusicItem) -> Bool in
+            var categoryMatch = (scope == "All") || (song.songCategory == scope)
             let stringMatch = song.songName.lowercaseString.rangeOfString(searchText.lowercaseString)
-            return (stringMatch != nil)
+            self.isSearching = true
+            return categoryMatch && (stringMatch != nil)
         })
     }
     //reloads the table when the search bar is updated
     func searchDisplayController(controller: UISearchDisplayController!, shouldReloadTableForSearchString searchString: String!) -> Bool{
-        self.filterContentForSearchText(searchString)
+        let scopes = self.searchDisplayController!.searchBar.scopeButtonTitles as [String]
+        let selectedScope = scopes[self.searchDisplayController!.searchBar.selectedScopeButtonIndex] as String
+        self.filterContentForSearchText(searchString, scope: selectedScope)
+        isSearching = true
         return true
     }
     
     func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchScope searchOption: Int) -> Bool {
-        self.filterContentForSearchText(self.searchDisplayController!.searchBar.text)
+        let scope = self.searchDisplayController?.searchBar.scopeButtonTitles as [String]
+        self.filterContentForSearchText(self.searchDisplayController!.searchBar.text, scope: scope[searchOption])
+        isSearching = true
         return true
     }
     
@@ -143,27 +166,39 @@ class MusicTableViewController: UITableViewController, UISearchBarDelegate, UISe
     func searchDisplayController(controller: UISearchDisplayController, didLoadSearchResultsTableView tableView: UITableView) {
         tableView.rowHeight = 109;
     }
-    /*
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!){
         if segue.identifier == "mainScreen"{
-            let mainScreenViewController = segue.destinationViewController as ViewController
+            //let mainScreenViewController = segue.destinationViewController as ViewController
             
-            if sender as MusicTableViewController == self.searchDisplayController!.searchResultsTableView{
+            if isSearching{
                 let indexPath = self.searchDisplayController!.searchResultsTableView.indexPathForSelectedRow()!
-                let destinationTitle = self.filteredSongs[indexPath.row].songName
-                mainScreenViewController.songTitle.text = destinationTitle
+                let song = self.filteredSongs[indexPath.row]
+                setAttributes(song)
+                
                 
             }
 
             else{
                 let indexPath = self.tableView.indexPathForSelectedRow()!
-                let destinationTitle = self.musicItemArray[indexPath.row].songName
-                mainScreenViewController.songTitle.text = destinationTitle
+                let song = self.musicItemArray[indexPath.row]
+                setAttributes(song)
+                
             }
         }
     }
     
-    */
+    func setAttributes(song: MusicItem){
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        appDelegate.songTitle = song.songName
+        appDelegate.songArtist = song.songArtist
+        appDelegate.songAlbum = song.songAlbum
+        appDelegate.songUrl = song.songLocation
+        appDelegate.songStart = song.songStart
+        appDelegate.songEnd = song.songEnd
+    }
+    
+    
 
     /*
     // Override to support conditional editing of the table view.
