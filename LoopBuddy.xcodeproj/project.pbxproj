@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F4DFFDF1AEF13E100F3CDEE /* Never Stop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6F4DFFD91AEF13E100F3CDEE /* Never Stop.mp3 */; };
+		6F4DFFE01AEF13E100F3CDEE /* Real Love.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6F4DFFDA1AEF13E100F3CDEE /* Real Love.mp3 */; };
+		6F4DFFE11AEF13E100F3CDEE /* The Hum.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6F4DFFDB1AEF13E100F3CDEE /* The Hum.mp3 */; };
+		6F4DFFE21AEF13E100F3CDEE /* Love Me Like You Do.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6F4DFFDC1AEF13E100F3CDEE /* Love Me Like You Do.mp3 */; };
+		6F4DFFE31AEF13E100F3CDEE /* Pay No Mind.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6F4DFFDD1AEF13E100F3CDEE /* Pay No Mind.mp3 */; };
+		6F4DFFE41AEF13E100F3CDEE /* Truffle Butter.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6F4DFFDE1AEF13E100F3CDEE /* Truffle Butter.mp3 */; };
+		6F4DFFE61AEF13FB00F3CDEE /* Wasted.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6F4DFFE51AEF13FB00F3CDEE /* Wasted.mp3 */; };
+		6F5009F91AE8316E00A91B76 /* MusicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5009F81AE8316E00A91B76 /* MusicCell.swift */; };
 		6F955CFA1AC89FDC00D66C15 /* MusicTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F955CF91AC89FDC00D66C15 /* MusicTableViewController.swift */; };
 		6F955CFC1AC89FFC00D66C15 /* StemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F955CFB1AC89FFC00D66C15 /* StemTableViewController.swift */; };
 		6F955D001ACF4B3E00D66C15 /* MusicItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F955CFF1ACF4B3E00D66C15 /* MusicItem.swift */; };
@@ -35,6 +43,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6F4DFFD91AEF13E100F3CDEE /* Never Stop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Never Stop.mp3"; sourceTree = "<group>"; };
+		6F4DFFDA1AEF13E100F3CDEE /* Real Love.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Real Love.mp3"; sourceTree = "<group>"; };
+		6F4DFFDB1AEF13E100F3CDEE /* The Hum.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "The Hum.mp3"; sourceTree = "<group>"; };
+		6F4DFFDC1AEF13E100F3CDEE /* Love Me Like You Do.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Love Me Like You Do.mp3"; sourceTree = "<group>"; };
+		6F4DFFDD1AEF13E100F3CDEE /* Pay No Mind.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Pay No Mind.mp3"; sourceTree = "<group>"; };
+		6F4DFFDE1AEF13E100F3CDEE /* Truffle Butter.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Truffle Butter.mp3"; sourceTree = "<group>"; };
+		6F4DFFE51AEF13FB00F3CDEE /* Wasted.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Wasted.mp3; sourceTree = "<group>"; };
+		6F5009F81AE8316E00A91B76 /* MusicCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicCell.swift; sourceTree = "<group>"; };
 		6F955CF91AC89FDC00D66C15 /* MusicTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicTableViewController.swift; sourceTree = "<group>"; };
 		6F955CFB1AC89FFC00D66C15 /* StemTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StemTableViewController.swift; sourceTree = "<group>"; };
 		6F955CFF1ACF4B3E00D66C15 /* MusicItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicItem.swift; sourceTree = "<group>"; };
@@ -107,6 +123,13 @@
 		6FB6B1E51AC0BCA400864219 /* LoopBuddy */ = {
 			isa = PBXGroup;
 			children = (
+				6F4DFFE51AEF13FB00F3CDEE /* Wasted.mp3 */,
+				6F4DFFD91AEF13E100F3CDEE /* Never Stop.mp3 */,
+				6F4DFFDA1AEF13E100F3CDEE /* Real Love.mp3 */,
+				6F4DFFDB1AEF13E100F3CDEE /* The Hum.mp3 */,
+				6F4DFFDC1AEF13E100F3CDEE /* Love Me Like You Do.mp3 */,
+				6F4DFFDD1AEF13E100F3CDEE /* Pay No Mind.mp3 */,
+				6F4DFFDE1AEF13E100F3CDEE /* Truffle Butter.mp3 */,
 				6FB2955E1AC899000013C26F /* SWRevealViewController */,
 				6FB295581AC0D4040013C26F /* Sweet Dreams.mp3 */,
 				6F955CF91AC89FDC00D66C15 /* MusicTableViewController.swift */,
@@ -122,6 +145,7 @@
 				6FB6B1E61AC0BCA400864219 /* Supporting Files */,
 				6F955CFB1AC89FFC00D66C15 /* StemTableViewController.swift */,
 				6F955CFF1ACF4B3E00D66C15 /* MusicItem.swift */,
+				6F5009F81AE8316E00A91B76 /* MusicCell.swift */,
 			);
 			path = LoopBuddy;
 			sourceTree = "<group>";
@@ -231,10 +255,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F4DFFE61AEF13FB00F3CDEE /* Wasted.mp3 in Resources */,
+				6F4DFFE31AEF13E100F3CDEE /* Pay No Mind.mp3 in Resources */,
+				6F4DFFE11AEF13E100F3CDEE /* The Hum.mp3 in Resources */,
 				6FB6B1EE1AC0BCA400864219 /* Main.storyboard in Resources */,
+				6F4DFFE01AEF13E100F3CDEE /* Real Love.mp3 in Resources */,
 				6FB6B1F31AC0BCA400864219 /* LaunchScreen.xib in Resources */,
 				6FB295591AC0D4040013C26F /* Sweet Dreams.mp3 in Resources */,
+				6F4DFFE41AEF13E100F3CDEE /* Truffle Butter.mp3 in Resources */,
+				6F4DFFE21AEF13E100F3CDEE /* Love Me Like You Do.mp3 in Resources */,
 				6FB6B1F01AC0BCA400864219 /* Images.xcassets in Resources */,
+				6F4DFFDF1AEF13E100F3CDEE /* Never Stop.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,6 +290,7 @@
 				6FB295531AC0BD7B0013C26F /* RangeSlider.swift in Sources */,
 				AA5D95BF1ADCC1D100FCA20A /* NavigationController.swift in Sources */,
 				6FB6B1E91AC0BCA400864219 /* AppDelegate.swift in Sources */,
+				6F5009F91AE8316E00A91B76 /* MusicCell.swift in Sources */,
 				6FB295541AC0BD7B0013C26F /* RangeSliderThumbLayer.swift in Sources */,
 				6FB295621AC899890013C26F /* SWRevealViewController.m in Sources */,
 				6F955CFA1AC89FDC00D66C15 /* MusicTableViewController.swift in Sources */,

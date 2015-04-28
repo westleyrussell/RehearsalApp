@@ -18,13 +18,20 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var sliderRate: UISlider!
     @IBOutlet weak var sliderValue: UILabel!
+    
     @IBOutlet weak var songTitle: UILabel!
     @IBOutlet weak var menuButton: UIBarButtonItem!
+
     @IBOutlet weak var saveSampleButton: UIButton!
     @IBOutlet weak var saveSample: UIButton!
     @IBOutlet weak var tempoStepper: UIStepper!
     @IBOutlet weak var sliderEndPoint: UITextField!
     @IBOutlet weak var sliderStartPoint: UITextField!
+
+    var songName:String = ""
+    
+    
+
     
     var song = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Sweet Dreams", ofType: "mp3")!)
     var audioPlayer = AVAudioPlayer()
@@ -36,6 +43,24 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
         
         self.view.backgroundColor = UIColor(red:247/255, green:247/255,blue:247/255,alpha:1.0)
         //self.saveSample.layer.cornerRadius = 15.0
+
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        songName = appDelegate.songTitle
+        println(songName)
+        println(appDelegate.songUrl)
+        self.songTitle.text = songName
+        if var path = appDelegate.songUrl{
+            println(path)
+            self.song = path
+        }
+        
+        
+        
+        
+        
+        
+        
+
         
         if self.revealViewController() != nil {//set the menu button action listenter
             menuButton.target = self.revealViewController()
@@ -56,7 +81,8 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
         view.addSubview(rangeSlider)
         
         rangeSlider.addTarget(self, action: "rangeSliderValueChanged:", forControlEvents: .ValueChanged)
-        
+        rangeSlider.lowerValue = appDelegate.songStart
+        rangeSlider.upperValue = appDelegate.songEnd
         
         setSongConstraints(rangeSlider.lowerValue, songEnd: rangeSlider.upperValue)
         
@@ -75,6 +101,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
         
 
     }
+    
     
     override func viewDidLayoutSubviews() {
         let margin:CGFloat = 20.0
@@ -105,6 +132,8 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
         setSongConstraints(rangeSlider.lowerValue, songEnd: rangeSlider.upperValue)
         
     }
+    
+    
 
     @IBAction func playButton(sender: AnyObject) {
         if self.playButton.currentImage == UIImage(named:"Play.png"){
@@ -159,15 +188,6 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
     
     func checkTime() {
         if audioPlayer.currentTime >= audioPlayer.duration * rangeSlider.upperValue
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
         {
             timer.invalidate()

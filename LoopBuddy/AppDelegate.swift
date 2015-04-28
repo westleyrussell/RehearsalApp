@@ -13,6 +13,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     let red = UIColor(red:245/255, green:99/255, blue:86/255, alpha:1.0)
+    var songTitle = "Select a Song"
+    var songArtist = "No Song Selected"
+    var songAlbum = "No Song Selected"
+    var songUrl = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Sweet Dreams", ofType: "mp3")!)
+    var songStart = 0.0
+    var songEnd = 1.0
+    
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -20,7 +27,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         navigationBarAppearace.tintColor = red
         navigationBarAppearace.barTintColor = red
-        
+        songTitle = "Select a Song"
+        songArtist = "No Song Selected"
+        songAlbum = "No Song Selected"
+        songUrl = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Sweet Dreams", ofType: "mp3")!)
+        songStart = 0.0
+        songEnd = 1.0
         return true
     }
 
