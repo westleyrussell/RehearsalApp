@@ -47,10 +47,13 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         songName = appDelegate.songTitle
         println(songName)
+        println()
         println(appDelegate.songUrl)
+        println()
         self.songTitle.text = songName
         if var path = appDelegate.songUrl{
             println(path)
+            println()
             self.song = path
         }
         
@@ -200,10 +203,23 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
             let alertController = UIAlertController(title: "Save Sample", message:
                 "Save this sample of Song Title?", preferredStyle: UIAlertControllerStyle.Alert)
             alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default,handler: nil))
-            alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
+        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: saveSong))
             
             self.presentViewController(alertController, animated: true, completion: nil)
 
+    }
+    
+    func saveSong(act:UIAlertAction!){
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        var song = MusicItem(songName: appDelegate.songTitle, songArtist: appDelegate.songArtist, songAlbum: appDelegate.songAlbum, songGenre: "placeholder", category: "Sample", location: appDelegate.songUrl!, songStart: rangeSlider.lowerValue, songEnd: rangeSlider.upperValue)
+        var isInserted = ModelManager.instance.addMusicSample(song)
+        if isInserted{
+            Util.invokeAlertMethod("", strBody: "Song inserted", delegate: nil)
+            
+        }
+        else{
+            Util.invokeAlertMethod("", strBody: "Error in insertion", delegate: nil)
+        }
     }
     
     @IBAction func tempoValueChanged(sender: UIStepper) {

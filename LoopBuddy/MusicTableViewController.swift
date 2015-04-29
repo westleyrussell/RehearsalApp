@@ -63,7 +63,8 @@ class MusicTableViewController: UITableViewController, UISearchBarDelegate, UISe
             MusicItem(songName: "Truffle Butter", songArtist: "Nicki Minaj", songAlbum: "Thigh Gap Nation",  songGenre: "Pre Game", category: "Songs", location: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Truffle Butter", ofType: "mp3")!)!),
             MusicItem(songName: "Wasted (Ummet Ozcan Remix)", songArtist: "Tiesto", songAlbum: "Thigh Gap Nation",  songGenre: "Pre Game", category: "Songs", location: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Wasted", ofType: "mp3")!)!)]
             
-        
+        var samples = ModelManager.instance.getAllSamples()
+        self.musicItemArray += samples
         self.tableView.reloadData()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false

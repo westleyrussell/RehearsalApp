@@ -33,6 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         songUrl = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Sweet Dreams", ofType: "mp3")!)
         songStart = 0.0
         songEnd = 1.0
+        Util.copyFile("Samples.sqlite")
         return true
     }
 
