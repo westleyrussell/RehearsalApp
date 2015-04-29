@@ -16,11 +16,10 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
     let red = UIColor(red:245/255, green:99/255,blue:86/255,alpha:1.0)
     
     @IBOutlet weak var playButton: UIButton!
-    @IBOutlet weak var sliderRate: UISlider!
-    @IBOutlet weak var sliderValue: UILabel!
     
     @IBOutlet weak var songTitle: UILabel!
     @IBOutlet weak var menuButton: UIBarButtonItem!
+    @IBOutlet weak var tempoLabel: UILabel!
 
     @IBOutlet weak var saveSampleButton: UIButton!
     @IBOutlet weak var saveSample: UIButton!
@@ -29,10 +28,6 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
     @IBOutlet weak var sliderStartPoint: UITextField!
 
     var songName:String = ""
-    
-    
-
-    
     var song = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Sweet Dreams", ofType: "mp3")!)
     var audioPlayer = AVAudioPlayer()
     var timer:NSTimer!
@@ -56,14 +51,6 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
             println()
             self.song = path
         }
-        
-        
-        
-        
-        
-        
-        
-
         
         if self.revealViewController() != nil {//set the menu button action listenter
             menuButton.target = self.revealViewController()
@@ -92,17 +79,12 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
 
         self.saveSampleButton.layer.cornerRadius = 20.0
         
-        self.tempoStepper.wraps = true
+        self.tempoStepper.wraps = false
         self.tempoStepper.autorepeat = true
-        self.tempoStepper.maximumValue = 2
-        self.tempoStepper.minimumValue = 0
-        self.tempoStepper.value = 1
-        self.tempoStepper.stepValue = 0.001
-        
-        
-        
-        
-
+        self.tempoStepper.maximumValue = 2.0
+        self.tempoStepper.minimumValue = 0.3 //anything lower and sound gets distorted
+        self.tempoStepper.value = 1.0
+        self.tempoStepper.stepValue = 0.1
     }
     
     
@@ -158,30 +140,30 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
 
     }
     
-    @IBAction func sliderRate(sender: AnyObject) {
-        audioPlayer.rate = self.sliderRate.value
-        updateSliderValue(audioPlayer.rate)
-    }
-    
     @IBAction func resetButton(sender: AnyObject) {
-        self.sliderRate.value = 1.0
+        self.tempoStepper.value = 1.0
         rangeSlider.lowerValue = 0.0
         rangeSlider.upperValue = 1.0
-        audioPlayer.rate = self.sliderRate.value
-        updateSliderValue(audioPlayer.rate)
+        audioPlayer.rate = Float(self.tempoStepper.value)
+        updateTempoLabel(audioPlayer.rate)
         setSongConstraints(rangeSlider.lowerValue, songEnd: rangeSlider.upperValue)
     }
     
-    func updateSliderValue(value: Float){
-    self.sliderValue.text = value.description
+    func updateTempoLabel(value: Float){
+        self.tempoLabel.text = value.description
     
     }
     
     func setSongConstraints(songStart: Double, songEnd: Double){
-        audioPlayer.currentTime = audioPlayer.duration * songStart
+        audioPlayer.currentTime = getStartPoint()
         timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "checkTime", userInfo: songStart, repeats:true)
+        updateTimeTexts(getStartPoint(), end: getEndPoint())
     }
     
+    func updateTimeTexts(start: Double, end: Double){
+        sliderStartPoint.text = secondsToTime(start)
+        sliderEndPoint.text = secondsToTime(end)
+    }
     func audioPlayerDidFinishPlaying(player: AVAudioPlayer!, successfully
         flag: Bool) {
             setSongConstraints(rangeSlider.lowerValue, songEnd: rangeSlider.upperValue)
@@ -191,13 +173,33 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
     
     func checkTime() {
         if audioPlayer.currentTime >= audioPlayer.duration * rangeSlider.upperValue
-        
         {
             timer.invalidate()
             setSongConstraints(rangeSlider.lowerValue, songEnd: rangeSlider.upperValue)
         }
     }
     
+    func setStartPoint(value: Double) {
+        var start = value
+        if value < 0 { start = 0 }
+        if value > 1.0 { start = 1.0 }
+        setSongConstraints(start, songEnd: rangeSlider.upperValue)
+    }
+    
+    func setEndPoint(value: Double) {
+        var end = value
+        if value < 0 { end = 0 }
+        if value > 1.0 { end = 1.0 }
+        setSongConstraints(rangeSlider.lowerValue, songEnd: end)
+    }
+    
+    func getStartPoint() -> Double {
+        return rangeSlider.lowerValue * audioPlayer.duration
+    }
+    
+    func getEndPoint() -> Double {
+        return rangeSlider.upperValue * audioPlayer.duration
+    }
     @IBAction func saveSamplePress(sender: UIButton) {
 
             let alertController = UIAlertController(title: "Save Sample", message:
@@ -206,7 +208,6 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
         alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: saveSong))
             
             self.presentViewController(alertController, animated: true, completion: nil)
-
     }
     
     func saveSong(act:UIAlertAction!){
@@ -223,12 +224,56 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
     }
     
     @IBAction func tempoValueChanged(sender: UIStepper) {
-            sliderValue.text = Int(sender.value).description
+        let speed = Double(round(10 * sender.value) / 10)
+        tempoLabel.text = speed.description
+        audioPlayer.rate = Float(speed)
     }
     @IBAction func startPointSet(sender: UITextField) {
+        //setStartPoint(timeToPortion(sender.text))
     }
 
     @IBAction func endPointSet(sender: UITextField) {
+        //setStartPoint(timeToPortion(sender.text))
+    }
+    
+    func secondsToTime(seconds: Double) -> String {
+        let hour = Int(seconds / 3600)
+        let min = Int((seconds % 3600) / 60)
+        let sec = Int(seconds % 60)
+        
+        var h = String(hour)
+        if hour < 10 { h = "0" + h }
+        var m = String(min)
+        if min < 10 { m = "0" + m }
+        var s = String(sec)
+        if sec < 10 { s = "0" + s }
+    
+        if hour == 0 { return m + ":" + s }
+        else { return h + ":" + m + ":" + s }
+    }
+    
+    func timeToPortion(time: String) -> Double {
+        return secondsToPortion(timeToSeconds(time))
+    }
+    
+    //will break if not properly formatted. Oops.
+    func timeToSeconds(time: String) -> Double {
+        var result = 0.0
+        if countElements(time) > 5 { //has hours
+            result += (time.substringFromIndex(advance(time.endIndex, -2)) as NSString).doubleValue
+            result += 60 * (time[Range(start: advance(time.endIndex, -5), end: advance(time.endIndex, -3))] as NSString).doubleValue
+            result += 3600 * (time.substringToIndex(advance(time.endIndex, -6)) as NSString).doubleValue
+        }
+        else { //no hours
+            result += 60.0 * (time.substringToIndex(advance(time.startIndex, 2)) as NSString).doubleValue
+            result += (time.substringFromIndex(advance(time.startIndex, 3)) as NSString).doubleValue
+        }
+        
+        return result
+    }
+    
+    func secondsToPortion(seconds: Double) -> Double {
+        return seconds / audioPlayer.duration
     }
 }
 
