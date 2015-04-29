@@ -44,7 +44,7 @@ class ModelManager: NSObject {
             while resultSet.next(){
                 print(resultSet.stringForColumn(urlCol))
                 println()
-                samples.append(MusicItem(songName: (resultSet.stringForColumn(nameCol) + " " + resultSet.stringForColumn("id")), songArtist: resultSet.stringForColumn(artistCol), songAlbum: resultSet.stringForColumn(artistCol), songGenre: resultSet.stringForColumn(genreCol), category: "Sample", location: NSURL(string: resultSet.stringForColumn(urlCol))!, songStart: resultSet.doubleForColumn(startTimeCol), songEnd: resultSet.doubleForColumn(endTimeCol)))
+                samples.append(MusicItem(songName: (resultSet.stringForColumn(nameCol) + " " + resultSet.stringForColumn("id")), songArtist: resultSet.stringForColumn(artistCol), songAlbum: resultSet.stringForColumn(albumCol), songGenre: resultSet.stringForColumn(genreCol), category: "Sample", location: NSURL(string: resultSet.stringForColumn(urlCol))!, songStart: resultSet.doubleForColumn(startTimeCol), songEnd: resultSet.doubleForColumn(endTimeCol)))
             }
         }
         sharedInstance.database!.close()
